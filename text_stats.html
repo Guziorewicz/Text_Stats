@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        textarea{
+            width:90%;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Zdefiniuj textarea do wpisywania oraz parametry do zliczania -->
+    <textarea name="" id=""></textarea>
+    <div>
+        <div>Ilość znaków : <span id="num-characters"></span></div>
+        <div>Ilość słów : <span id="num-words"></span></div>
+        <div>Ilość zdań : <span id="num-sentences"></span></div>
+    </div>
+
+
+    <script>
+        // przypisz do zmiennej "textArea" wszystko co w dokumencie jest wpisaywane w te pola
+        let textArea = document.getElementsByTagName("textarea")[0];
+        
+        // utwórz event dla wpisywanych wartości do zmiennej i wywołaj funkcję "onChange"
+        textArea.addEventListener("input", onChange);
+       
+       
+       // zdefiniuj funkcję zliczającą parametry
+        function onChange(e){
+
+        // przypisz do zmiennej "data" wartość zmiennej "textArea" w tym przypadku string
+            const data = textArea.value;
+
+        // do zmiennej odnoszącej się do znaków przypisz długość stringa "data"
+            const numCharacters = data.length;
+        // przypisz do oznaczonego id, długość stringa    
+            document.getElementById("num-characters").innerHTML = numCharacters;
+        
+        // do zmiennej odnoszacej się do zdań przypisz długość zmiennej "data", zliczając przy tym podział na kropki   
+            const numSentences = data.split(".").length;
+            document.getElementById("num-sentences").innerHTML = numSentences;
+        
+        // do zmiennej odnoszącej się do wyrazów, przypisz długośc zmiennej "data", zliczając przy tym podział na spacje
+        // dodaj do tego funkcję "replace" aby zamienić znaki podziału (takie jak "enter" czy "przecinek") na spacje
+            const numWords = data.replace(/[\r\n,]/g, " ").split(" ").length;
+            document.getElementById("num-words").innerHTML = numWords;
+            
+            
+        }
+    </script>
+
+</body>
+</html>
